@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  respond_to :json
   before_filter :find_user, :except => [:index, :create]
 
   def index
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    respond_with user
+    respond_with @user
   end
 
   def update
