@@ -15,22 +15,22 @@ describe FavoritesController do
     its(:status) { should be 200}
   end
 
-  # describe "POST 'create'" do
-  #   let!(:user)      { create :user }
-  #   before(:each) { post :create, :user_id => user.id, favorite_attrs }
+  describe "POST 'create'" do
+    let!(:user)      { create :user }
+    before(:each) { post :create, :user_id => user.id, :favorite => attributes_for(:favorite) }
 
-  #   its(:body)    { should_not be_empty }
-  #   its(:status)  { should be 201 }
-  #   its(:headers) { should include "Location" }
+    its(:body)    { should_not be_empty }
+    its(:status)  { should be 201 }
+    its(:headers) { should include "Location" }
 
-  #   context "with bad params" do
-  #     let!(:user)      { create :user }
-  #     before(:each) { post :create, bad_favorite_attrs, :user_id => user.id  }
+    context "with bad params" do
+      let!(:user)      { create :user }
+      before(:each) { post :create, :user_id => user.id, :favorite => { :user_id => nil }}
 
-  #     its(:body)    { should_not be_empty }
-  #     its(:status)  { should be 422 }
-  #   end
-  # end
+      its(:body)    { should_not be_empty }
+      its(:status)  { should be 422 }
+    end
+  end
   context "existing favorite" do
     let!(:favorite)      { create :favorite }
     let!(:user)      { create :user }
@@ -51,9 +51,9 @@ describe FavoritesController do
       end
     end
   end
-    # describe "PUT 'update'" do
-    #   let!(:user)      { create :user }
-    #   before(:each) { put :update, favorite_attrs }
+    describe "PUT 'update'" do
+      let!(:user)      { create :user }
+      before(:each) { put :update, favorite_attrs }
 
     #   its("body.strip") { should be_empty }
     #   its(:status)      { should be 204 }
@@ -68,7 +68,7 @@ describe FavoritesController do
     #     its(:body)    { should_not be_empty }
     #     its(:status)  { should be 422 }
     #   end
-    # end
+    end
 
     describe "DELETE 'destroy'" do
       let!(:favorite)      { create :favorite }
@@ -78,5 +78,4 @@ describe FavoritesController do
       its("body.strip") { should be_empty }
       its(:status)      { should be 204 }
     end
-  # end
 end
