@@ -1,10 +1,11 @@
 class FavoritesController < ApplicationController
   respond_to :json
-  before_filter :find_user
+  before_filter :find_user, :only   => [:index, :create]
+  before_filter :find_favorite,:except => [:index, :create]
 
   def index
     @favorites = Favorite.all
-    respond_with @favorites
+    respond_with @favorites.to_json(:include => :cut)
   end
 
   def create
@@ -40,6 +41,6 @@ class FavoritesController < ApplicationController
     end
 
     def favorite_params
-      params.require(:favorite).permit(:user_id, :cut_id)
+      params.require(:favorite).permit(:user, :cut)
     end
 end
