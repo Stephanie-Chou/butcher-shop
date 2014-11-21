@@ -3,7 +3,7 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   cities = City.create([{ name: 'Chicago' }, {name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
@@ -17,7 +17,7 @@ Cut.create(name:"porterhouse" , animal: cow )
 Cut.create(name:"t-bone" , animal: cow )
 Cut.create(name:"strip" , animal: cow )
 pig = Animal.create(name:"pig")
-PrimalCut.create(name:"jowl" , animal: pig )
+PrimalCut.create(name:"jowl" , animal_id: pig )
 PrimalCut.create(name:"ham" , animal: pig )
 loin = PrimalCut.create(name:"loin" , animal: pig )
 Cut.create(name:"Loin Chop" , animal: pig, primal_cut: loin )
@@ -27,4 +27,8 @@ Cut.create(name:"Blade Roast" , animal: pig, primal_cut: loin )
 
 Cut.create(name:"Babyback Ribs" , animal: pig )
 Cut.create(name:"Spareribs" , animal: pig )
-Cut.create(name:"Hock" , animal: pig )
+hock = Cut.create(name:"Hock" , animal: pig )
+
+user = User.create(first_name: "bob" , last_name: "bob", email: "bob@bob.com")
+
+favorite = Favorite.create(user_id: user.id, cut_id: hock.id)

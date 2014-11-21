@@ -3,4 +3,5 @@ class Cut < ActiveRecord::Base
   validates :name, :presence => true
   belongs_to :animal
   belongs_to :primal_cut
+  has_many :favorites
 end
